@@ -42,4 +42,16 @@ class AuthController extends Controller
 
         return $this->successResponse('User Logged In Successfully', $generateToken);
     }
+
+    /**
+     * Logout a user from the blog system
+     *
+     * @return JsonResponse
+     */
+    public function logout(): JsonResponse
+    {
+        request()->user()->tokens()->delete();
+
+        return $this->successResponse('User Logged Out Successfully');
+    }
 }
