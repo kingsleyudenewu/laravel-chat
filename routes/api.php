@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MessageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,11 +19,10 @@ Route::group([
 });
 
 Route::group([
-    'prefix' => 'user',
-    'as' => 'user.',
+    'prefix' => 'messages',
+    'as' => 'messages.',
     'middleware' => 'auth:sanctum',
 ], function () {
-    Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
-    Route::post('/update', [AuthController::class, 'update'])->name('update');
-    Route::post('/change-password', [AuthController::class, 'changePassword'])->name('change-password');
+    Route::get('/', [MessageController::class, 'getMessages'])->name('get');
+    Route::post('/', [MessageController::class, 'sendMessage'])->name('send');
 });
